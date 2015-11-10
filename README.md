@@ -85,6 +85,7 @@ The content of the app/output/it/index.html will be:
 And that's all folk.
 
 ## Next improvements
+- Translate JavaDoc in English.
 - Create a Netbeans extension.
 - Create a JetBrains extension.
 - Add the jar in the Maven Central Repository.
