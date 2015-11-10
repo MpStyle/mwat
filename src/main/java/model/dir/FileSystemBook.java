@@ -1,5 +1,6 @@
 package model.dir;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 
 import java.io.File;
@@ -34,6 +35,7 @@ public final class FileSystemBook {
    * Overriding del metodo {@link #deleteFolder(File) deleteFolder(File)}
    *
    * @param folder
+   * @throws Exception
    */
   public static void deleteFolder(String folder) throws Exception {
     FileSystemBook.deleteFolder(new File(folder));
@@ -43,6 +45,7 @@ public final class FileSystemBook {
    * Cancella ricorsivamente il contenuto di <i>folder</i>.
    *
    * @param folder
+   * @throws Exception
    */
   public static void deleteFolder(File folder) throws Exception {
     File[] files = folder.listFiles();
@@ -64,5 +67,21 @@ public final class FileSystemBook {
       throw new Exception(String.format("Impossible to delete the folder %s",
           folder.getAbsolutePath()));
     }
+  }
+
+  /**
+   * Se necessario crea la cartella di destinazione <i>folderPath</i> e salva il file <i>fileName</i>
+   * con contenuto <i>content</i> all'interno di essa.
+   *
+   * @param content
+   * @param fileName
+   * @param folderPath
+   * @throws Exception
+   */
+  public static void saveFile(String content, String fileName,
+      String folderPath, String fileEncode) throws Exception {
+    FileSystemBook.createFolder(new File(folderPath));
+    final File f = new File(folderPath + File.separator + fileName);
+    FileUtils.writeStringToFile(f, content, fileEncode);
   }
 }

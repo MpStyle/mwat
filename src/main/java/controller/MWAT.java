@@ -7,7 +7,6 @@ import model.htmlfile.HTMLFileBook;
 import model.jsonfile.JSONFile;
 import model.jsonfile.JSONFileBook;
 import model.settings.Settings;
-import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -26,8 +25,6 @@ import java.util.List;
  */
 public class MWAT {
   private final static Logger LOGGER = Logger.getLogger(MWAT.class);
-  private final static String DEFAULT_FILE_ENCODE = "UTF-8";
-
   private final ObjectMapper JSON_MAPPER = new ObjectMapper();
 
   private Settings settings;
@@ -116,25 +113,12 @@ public class MWAT {
             settings.getHtmlOutputPath() + File.separator + jsName
                 + File.separator + htmlInputFile.getRelativeFolderPath();
 
-        saveHtml(doc.outerHtml(), htmlInputFile.getFileName(), outputPath);
+        FileSystemBook
+            .saveFile(doc.outerHtml(), htmlInputFile.getFileName(), outputPath,
+                settings.getFileEncode());
       }
     } catch (Exception ex) {
       LOGGER.error(ex);
     }
-  }
-
-  /**
-   * Salva il file <i>fileName</i> nella cartella <i>folderPath</i> con contenuto <i>content</i>.
-   *
-   * @param content
-   * @param fileName
-   * @param folderPath
-   * @throws Exception
-   */
-  private void saveHtml(String content, String fileName, String folderPath)
-      throws Exception {
-    FileSystemBook.createFolder(new File(folderPath));
-    final File f = new File(folderPath + File.separator + fileName);
-    FileUtils.writeStringToFile(f, content, settings.getFileEncode());
   }
 }
