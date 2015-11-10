@@ -1,1 +1,22 @@
 INFO main model.dir.FileSystemBook - The output folder already exists.
+INFO main model.dir.FileSystemBook - The output folder already exists.
+INFO main model.dir.FileSystemBook - The output folder already exists.
+INFO main model.dir.FileSystemBook - The output folder already exists.
+INFO main model.dir.FileSystemBook - The output folder already exists.
+INFO main model.dir.FileSystemBook - The output folder already exists.
+ERROR main controller.MWAT - java.lang.NullPointerException
+INFO main model.dir.FileSystemBook - The output folder already exists.
+ERROR main controller.MWAT - java.lang.NullPointerException
+INFO main model.dir.FileSystemBook - The output folder already exists.
+ERROR main controller.MWAT - java.lang.NullPointerException
+INFO main model.dir.FileSystemBook - The output folder already exists.
+ERROR main controller.MWAT - java.lang.NullPointerException
+INFO main model.dir.FileSystemBook - The output folder already exists.
+ERROR main model.dir.FileSystemBook - It's impossible to create the output folder
+ERROR main controller.MWAT - java.lang.Exception: It's impossible to create the output folder
+INFO main model.dir.FileSystemBook - The output folder already exists.
+ERROR main controller.MWAT - java.io.FileNotFoundException: /Users/michelepagnin/tmp/mwat/target/test-classes/app/views (Is a directory)
+INFO main model.dir.FileSystemBook - The output folder already exists.
+INFO main model.dir.FileSystemBook - The output folder already exists.
+INFO main model.dir.FileSystemBook - The output folder already exists.
+INFO main model.dir.FileSystemBook - The output folder already exists.

@@ -35,7 +35,7 @@ public final class FileSystemBook {
    *
    * @param folder
    */
-  public static void deleteFolder(String folder) {
+  public static void deleteFolder(String folder) throws Exception {
     FileSystemBook.deleteFolder(new File(folder));
   }
 
@@ -44,17 +44,25 @@ public final class FileSystemBook {
    *
    * @param folder
    */
-  public static void deleteFolder(File folder) {
+  public static void deleteFolder(File folder) throws Exception {
     File[] files = folder.listFiles();
     if (files != null) {
       for (File f : files) {
         if (f.isDirectory()) {
           deleteFolder(f);
         } else {
-          f.delete();
+          if (!f.delete()) {
+            throw new Exception(String
+                .format("Impossible to delete the folder %s",
+                    f.getAbsolutePath()));
+          }
         }
       }
     }
-    folder.delete();
+
+    if (!folder.delete()) {
+      throw new Exception(String.format("Impossible to delete the folder %s",
+          folder.getAbsolutePath()));
+    }
   }
 }

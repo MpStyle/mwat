@@ -3,13 +3,14 @@ package controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import model.dir.FileSystemBook;
 import model.htmlfile.HTMLFile;
+import model.htmlfile.HTMLFileBook;
 import model.jsonfile.JSONFile;
+import model.jsonfile.JSONFileBook;
+import model.settings.Settings;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,66 +30,12 @@ public class MWAT {
 
   private final ObjectMapper JSON_MAPPER = new ObjectMapper();
 
-  private String translationProperty = "tr";
-  private String translationPropertyQuery = "[" + translationProperty + "]";
-  private String htmlInputPath, jsonLanguagesInput, htmlOutputPath, fileEncode;
-  private boolean emptyOutputFolder = false;
+  private Settings settings;
   private List<JSONFile> jsList;
-  private List<String> htmlinputFileList;
+  private List<HTMLFile> htmlinputFileList;
 
-  /**
-   * Il costruttore riceve le cartelle di input delle traduzioni e delle view da tradurre e
-   * la cartella di output delle view tradotte.<br />
-   * L'encode dei file di input delle view da tradurre e dei file di output delle view
-   * tradotte sarà di defaul UTF-8.
-   *
-   * @param htmlInputPath      Path della cartella di input delle view da tradurre.
-   * @param jsonLanguagesInput Path della cartella di input delle traduzioni (file .json).
-   * @param htmlOutputPath     Path della cartella di output delle view tradotte.
-   */
-  public MWAT(String htmlInputPath, String jsonLanguagesInput,
-      String htmlOutputPath) {
-    this(htmlInputPath, jsonLanguagesInput, htmlOutputPath,
-        DEFAULT_FILE_ENCODE);
-  }
-
-  /**
-   * Restituisce le proprietà che indica se svuotare la cartella di output prima di
-   * creare le view tradotte.
-   *
-   * @return
-   */
-  public boolean isEmptyOutputFolder() {
-    return emptyOutputFolder;
-  }
-
-  /**
-   * Se impostato a true cancellerà il contenuto della cartella di destinazione
-   * delle view tradotte.
-   *
-   * @param emptyOutputFolder
-   */
-  public void setEmptyOutputFolder(boolean emptyOutputFolder) {
-    this.emptyOutputFolder = emptyOutputFolder;
-  }
-
-  /**
-   * Il costruttore riceve le cartelle di input delle traduzioni e delle view da tradurre e
-   * la cartella di output delle view tradotte.<br />
-   * L'encode dei file di input delle view da tradurre e dei file di output delle view
-   * tradotte sarà <i>fileEncode</i>.
-   *
-   * @param htmlInputPath      Path della cartella di input delle view da tradurre.
-   * @param jsonLanguagesInput Path della cartella di input delle traduzioni (file .json).
-   * @param htmlOutputPath     Path della cartella di output delle view tradotte.
-   * @param fileEncode
-   */
-  public MWAT(String htmlInputPath, String jsonLanguagesInput,
-      String htmlOutputPath, String fileEncode) {
-    this.htmlInputPath = htmlInputPath;
-    this.htmlOutputPath = htmlOutputPath;
-    this.jsonLanguagesInput = jsonLanguagesInput;
-    this.fileEncode = fileEncode;
+  public MWAT(Settings settings) {
+    this.settings = settings;
   }
 
   /**
@@ -109,9 +56,11 @@ public class MWAT {
    * dei tag con proprietà <i>tr</i> prepend la traduzione.<br />
    * Al termine salve un file <i>.html</i> di output.
    */
-  protected void run() throws IOException, Exception {
-    jsList = JSONFile.getJSONFile(jsonLanguagesInput);
-    htmlinputFileList = HTMLFile.getHTMLFile(htmlInputPath);
+  protected void run() throws Exception {
+    jsList = JSONFileBook.getJSONFile(settings.getJsonLanguagesInput());
+    htmlinputFileList = HTMLFileBook
+        .getHTMLFileList(settings.getHtmlInputPath(),
+            settings.getHtmlInputPath());
 
     if (jsList.size() <= 0) {
       LOGGER.info("Files of translations not found.");
@@ -123,8 +72,8 @@ public class MWAT {
       return;
     }
 
-    File output = new File(htmlOutputPath);
-    if (emptyOutputFolder) {
+    File output = new File(settings.getHtmlOutputPath());
+    if (settings.isEmptyOutputFolder()) {
       LOGGER.info("Empty output folder...");
       FileSystemBook.deleteFolder(output);
       LOGGER.info("Empty output folder completed.");
@@ -152,31 +101,22 @@ public class MWAT {
 
   private void parseViews(HashMap<String, String> entries, String jsName) {
     try {
-      for (String htmlinputFile : htmlinputFileList) {
-        File input = new File(htmlinputFile);
-        Document doc = Jsoup.parse(input, fileEncode);
+      for (HTMLFile htmlInputFile : htmlinputFileList) {
+        File input = new File(htmlInputFile.getAbsoluteFilePath());
+        Document doc = Jsoup.parse(input, settings.getFileEncode());
 
-        Elements toTranslateList = doc.select(translationPropertyQuery);
-
-        for (Element toTranslate : toTranslateList) {
-          String key = toTranslate.attr(translationProperty);
-
-          if (!entries.containsKey(key)) {
-            LOGGER.warn(String
-                .format("No translation for key %s in %s%s file.", key, jsName,
-                    JSONFile.JSON_FILE_EXTENSION));
-            continue;
-          }
-
-          String translation = entries.get(key);
-          toTranslate.prependText(translation);
+        doc = HTMLFileBook
+            .translateHtml(doc, entries, settings.getTranslationProperty(),
+                jsName);
+        if (doc == null) {
+          throw new Exception("Unknow error in the translation");
         }
 
-        String outputFilePath = htmlOutputPath + File.separator + jsName;
-        FileSystemBook.createFolder(new File(outputFilePath));
-        final File f = new File(
-            outputFilePath + File.separator + input.getName());
-        FileUtils.writeStringToFile(f, doc.outerHtml(), fileEncode);
+        String outputPath =
+            settings.getHtmlOutputPath() + File.separator + jsName
+                + File.separator + htmlInputFile.getRelativeFolderPath();
+
+        saveHtml(doc.outerHtml(), htmlInputFile.getFileName(), outputPath);
       }
     } catch (Exception ex) {
       LOGGER.error(ex);
@@ -184,19 +124,17 @@ public class MWAT {
   }
 
   /**
-   * @return
-   */
-  public String getTranslationProperty() {
-    return translationProperty;
-  }
-
-  /**
-   * Setta la proprietà dei tag HTML che indicano dove inserire il testo tradotto.
+   * Salva il file <i>fileName</i> nella cartella <i>folderPath</i> con contenuto <i>content</i>.
    *
-   * @param translationProperty
+   * @param content
+   * @param fileName
+   * @param folderPath
+   * @throws Exception
    */
-  public void setTranslationProperty(String translationProperty) {
-    this.translationProperty = translationProperty;
-    this.translationPropertyQuery = "[" + this.translationProperty + "]";
+  private void saveHtml(String content, String fileName, String folderPath)
+      throws Exception {
+    FileSystemBook.createFolder(new File(folderPath));
+    final File f = new File(folderPath + File.separator + fileName);
+    FileUtils.writeStringToFile(f, content, settings.getFileEncode());
   }
 }

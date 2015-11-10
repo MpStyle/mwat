@@ -1,10 +1,11 @@
 import controller.MWAT;
 import model.input.Input;
-import model.input.InputValidation;
+import model.input.InputValidationBook;
+import model.settings.Settings;
 import org.apache.log4j.Logger;
 
 public class Main {
-  private final static Logger LOGGER=Logger.getLogger(Main.class);
+  private final static Logger LOGGER = Logger.getLogger(Main.class);
 
   /**
    * args può gestire i seguenti parametri:
@@ -38,7 +39,7 @@ public class Main {
       i++;
     }
 
-    switch(InputValidation.validateHTMLInputFolder(htmlInputPath)){
+    switch (InputValidationBook.validateHTMLInputFolder(htmlInputPath)) {
     case ERROR_HTML_INPUT_FOLDER_IS_INVALID_PATH:
       LOGGER.error("-i HTML input folder must be a valid path.");
       return;
@@ -50,7 +51,7 @@ public class Main {
       return;
     }
 
-    switch(InputValidation.validateHTMLOutputFolder(htmlOutputPath)){
+    switch (InputValidationBook.validateHTMLOutputFolder(htmlOutputPath)) {
     case ERROR_HTML_OUTPUT_FOLDER_IS_INVALID_PATH:
       LOGGER.error("-h HTML output folder must be a valid path.");
       return;
@@ -61,7 +62,8 @@ public class Main {
       LOGGER.error("-h HTML output folder must be a folder.");
       return;
     }
-    switch(InputValidation.validateJSONLanguageFolder(jsonLanguagesInput)){
+    switch (InputValidationBook
+        .validateJSONLanguageFolder(jsonLanguagesInput)) {
     case ERROR_JSON_LANGUAGE_INPUT_FOLDER_IS_INVALID_PATH:
       LOGGER.error("-l JSON language folder must be a valid path.");
       return;
@@ -73,7 +75,10 @@ public class Main {
       return;
     }
 
-    MWAT m=new MWAT(htmlInputPath, jsonLanguagesInput, htmlOutputPath);
+    Settings settings = Settings.getSettings().setHtmlInputPath(htmlInputPath)
+        .setJsonLanguagesInput(jsonLanguagesInput)
+        .setHtmlOutputPath(htmlOutputPath);
+    MWAT m = new MWAT(settings);
     m.start();
   }
 
