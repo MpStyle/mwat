@@ -1,6 +1,6 @@
 # mwat
 ## What's mwat?
-mwat is a command line tool to perform an easy way to translate the HTML view for a web app.
+mwat (mobile web app translator) is a command line tool to perform an easy way to translate the HTML view for a web app.
 
 ## What?
 I know, it isn't easy to understand and for me, it isn't easy to explain.
