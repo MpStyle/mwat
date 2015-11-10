@@ -1,4 +1,4 @@
-package model.dir;
+package model.filesystem;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;

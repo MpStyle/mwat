@@ -1,7 +1,7 @@
 package controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import model.dir.FileSystemBook;
+import model.filesystem.FileSystemBook;
 import model.htmlfile.HTMLFile;
 import model.htmlfile.HTMLFileBook;
 import model.jsonfile.JSONFile;
