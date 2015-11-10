@@ -33,7 +33,7 @@ import java.util.List;
  * Classe di utility che raccoglie le operazioni atomiche che si possono effettuare
  * sui file .html.
  */
-public class HTMLFileBook {
+public final class HTMLFileBook {
   private static final Logger LOGGER = Logger.getLogger(HTMLFileBook.class);
   private static final String HTML_FILE_EXTENSION = ".html";
 

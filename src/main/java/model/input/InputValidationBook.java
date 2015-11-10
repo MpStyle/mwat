@@ -23,7 +23,7 @@ import java.io.File;
  * Classe di utility che raccoglie operazioni relative alla validazione degli input
  * del programma, passati da riga di comando.
  */
-public class InputValidationBook {
+public final class InputValidationBook {
   /**
    * Effettua la validazione del parametro che indica la cartella contenente i file
    * .html da tradurre.<br />

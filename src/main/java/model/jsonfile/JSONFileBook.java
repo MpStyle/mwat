@@ -23,7 +23,7 @@ import java.util.List;
  * along with mwat.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-public class JSONFileBook {
+public final class JSONFileBook {
   public static final String JSON_FILE_EXTENSION = ".json";
 
   /**
