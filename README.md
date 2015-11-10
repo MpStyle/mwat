@@ -3,8 +3,7 @@
 mwat (mobile web app translator) is a command line tool to perform an easy way to translate the HTML view for a web app.
 
 ## What?
-I know, it isn't easy to understand and for me, it isn't easy to explain.
-I restart with an example.
+I know, it isn't clear, let me try to explain with an example.
 
 ## Preamble
 I like to develop web apps. The web technologies are very attractive, easy to understand and use.
