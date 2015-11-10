@@ -83,3 +83,9 @@ The content of the app/output/it/index.html will be:
 ```
 
 And that's all folk.
+
+## Next improvements
+- Parse the sub-folders in the input folder and recreate the same stucture in the output folder.
+- Create a Netbeans extension.
+- Create a JetBrains extension.
+- Add the jar in the Maven Central Repository.
