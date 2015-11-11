@@ -113,6 +113,14 @@ public class MWAT {
     }
   }
 
+  /**
+   * Scorre tutte le view HTML che devono essere tradotte. Cercando la proprietà
+   * <i>segnaposto</i> che indicano quale traduzione utilizzare e prepend del testo
+   * localizzato.
+   *
+   * @param entries Mappa chiave-valore delle traduzioni.
+   * @param jsName  Identificativo della traduzione.
+   */
   private void parseViews(HashMap<String, String> entries, String jsName) {
     try {
       for (HTMLFile htmlInputFile : htmlinputFileList) {

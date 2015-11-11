@@ -23,6 +23,9 @@ import java.util.List;
  * along with mwat.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * Classe di utility che raccoglie operazioni sui file JSON.
+ */
 public final class JSONFileBook {
   public static final String JSON_FILE_EXTENSION = ".json";
 
@@ -35,16 +38,15 @@ public final class JSONFileBook {
   public static List<JSONFile> getJSONFile(String jsonFolder) {
     ArrayList<JSONFile> fileList = new ArrayList<JSONFile>();
     File folder = new File(jsonFolder);
+    File[] fileEntries = folder.listFiles(new FileJSONFilter());
 
-    for (final File fileEntry : folder.listFiles()) {
-      if (fileEntry.getName().endsWith(JSON_FILE_EXTENSION)) {
-        JSONFile jf = new JSONFile();
-        jf.setName(
-            StringBook.removeString(fileEntry.getName(), JSON_FILE_EXTENSION));
-        jf.setPath(fileEntry.getAbsolutePath());
+    for (final File fileEntry : fileEntries) {
+      JSONFile jf = new JSONFile();
+      jf.setName(
+          StringBook.removeString(fileEntry.getName(), JSON_FILE_EXTENSION));
+      jf.setPath(fileEntry.getAbsolutePath());
 
-        fileList.add(jf);
-      }
+      fileList.add(jf);
     }
 
     return fileList;

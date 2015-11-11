@@ -35,13 +35,14 @@ import java.util.List;
  */
 public final class HTMLFileBook {
   private static final Logger LOGGER = Logger.getLogger(HTMLFileBook.class);
-  private static final String HTML_FILE_EXTENSION = ".html";
+  public static final String HTML_FILE_EXTENSION = ".html";
 
   /**
    * Restituisce un elenco di stringhe che rappresentano i path dei file
    * contenuti nella cartella <i>htmlInputFolder</i>.
    *
-   * @param htmlFolder
+   * @param htmlFolder Cartella di input dei file HTML da tradurre.
+   * @param rootFolder Cartella di input dei file HTML da tradurre.
    * @return
    */
   public static List<HTMLFile> getHTMLFileList(String htmlFolder,
@@ -74,6 +75,16 @@ public final class HTMLFileBook {
     return fileList;
   }
 
+  /**
+   * Inserisce le traduzioni nel Document <i>doc</i> per gli Elements con
+   * <i>translationProperty</i> valorizzata.
+   *
+   * @param doc                 Document da tradurre.
+   * @param entries             Mappa chiave-valore delle traduzioni.
+   * @param translationProperty Proprietà dei tag che indica dove inserire la traduzione.
+   * @param jsName              Nome della traduzione.
+   * @return
+   */
   public static Document translateHtml(Document doc,
       HashMap<String, String> entries, String translationProperty,
       String jsName) {
