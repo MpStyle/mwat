@@ -1,8 +1,3 @@
-package mp.mwat.model.filesystem.file;
-
-import java.io.File;
-import java.io.FilenameFilter;
-
 /*
  * This file is part of mwat.
  *
@@ -19,6 +14,10 @@ import java.io.FilenameFilter;
  * You should have received a copy of the GNU General Public License
  * along with mwat.  If not, see <http://www.gnu.org/licenses/>.
  */
+package mp.mwat.model.filesystem.file;
+
+import java.io.File;
+import java.io.FilenameFilter;
 
 /**
  * Classe che estende FilenameFilter, specializzata nella ricerca di file data l'estensione.

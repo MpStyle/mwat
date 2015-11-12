@@ -1,5 +1,3 @@
-package mp.mwat.model.jsonfile;
-
 /*
  * This file is part of mwat.
  *
@@ -16,6 +14,8 @@ package mp.mwat.model.jsonfile;
  * You should have received a copy of the GNU General Public License
  * along with mwat.  If not, see <http://www.gnu.org/licenses/>.
  */
+package mp.mwat.model.jsonfile;
+
 /**
  * Incampsula le proprietà dei file JSON che contengono le traduzioni delle
  * stringhe.<br>

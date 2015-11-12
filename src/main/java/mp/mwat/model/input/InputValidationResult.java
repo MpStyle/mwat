@@ -1,5 +1,3 @@
-package mp.mwat.model.input;
-
 /*
  * This file is part of mwat.
  *
@@ -16,6 +14,8 @@ package mp.mwat.model.input;
  * You should have received a copy of the GNU General Public License
  * along with mwat.  If not, see <http://www.gnu.org/licenses/>.
  */
+package mp.mwat.model.input;
+
 public enum InputValidationResult
 {
     /**

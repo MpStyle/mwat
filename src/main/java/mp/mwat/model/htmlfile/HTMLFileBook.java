@@ -1,17 +1,3 @@
-package mp.mwat.model.htmlfile;
-
-import mp.mwat.model.jsonfile.JSONFileBook;
-import mp.mwat.model.string.StringBook;
-import org.apache.log4j.Logger;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 /*
  * This file is part of mwat.
  *
@@ -28,6 +14,20 @@ import java.util.List;
  * You should have received a copy of the GNU General Public License
  * along with mwat.  If not, see <http://www.gnu.org/licenses/>.
  */
+package mp.mwat.model.htmlfile;
+
+import mp.mwat.model.jsonfile.JSONFileBook;
+import mp.mwat.model.string.StringBook;
+import org.apache.log4j.Logger;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 /**
  * Classe di utility che raccoglie le operazioni atomiche che si possono
  * effettuare

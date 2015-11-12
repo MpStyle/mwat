@@ -1,7 +1,3 @@
-package mp.mwat.model.htmlfile;
-
-import java.io.File;
-
 /*
  * This file is part of mwat.
  *
@@ -18,6 +14,10 @@ import java.io.File;
  * You should have received a copy of the GNU General Public License
  * along with mwat.  If not, see <http://www.gnu.org/licenses/>.
  */
+package mp.mwat.model.htmlfile;
+
+import java.io.File;
+
 /**
  * Incampsula le proprietà dei file HTML da tradurre.<br>
  * Le proprietà sono:
