@@ -1,6 +1,6 @@
 package mp.mwat.model.jsonfile;
 
-import mp.mwat.model.filesystem.FileExtensionFilter;
+import mp.mwat.model.filesystem.file.FileExtensionFilter;
 
 /*
  * This file is part of mwat.

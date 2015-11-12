@@ -1,4 +1,4 @@
-package mp.mwat.model.filesystem;
+package mp.mwat.model.filesystem.file;
 
 import java.io.File;
 import java.io.FilenameFilter;

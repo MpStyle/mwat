@@ -1,7 +1,6 @@
 package mp.mwat.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import mp.mwat.model.filesystem.FileSystemBook;
 import mp.mwat.model.htmlfile.HTMLFile;
 import mp.mwat.model.htmlfile.HTMLFileBook;
 import mp.mwat.model.jsonfile.JSONFile;
@@ -15,6 +14,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import mp.mwat.model.filesystem.file.FileBook;
+import mp.mwat.model.filesystem.folder.FolderBook;
 
 /*
  * This file is part of mwat.
@@ -104,10 +105,10 @@ public class MWAT
         if (settings.isEmptyOutputFolder())
         {
             LOGGER.info("Empty output folder...");
-            FileSystemBook.deleteFolder(output);
+            FolderBook.deleteFolder(output);
             LOGGER.info("Empty output folder completed.");
         }
-        FileSystemBook.createFolder(output);
+        FolderBook.createFolder(output);
 
         parseTranslations();
     }
@@ -160,7 +161,7 @@ public class MWAT
                        = settings.getHtmlOutputPath() + File.separator + jsName
                     + File.separator + htmlInputFile.getRelativeFolderPath();
 
-                FileSystemBook
+                FileBook
                     .saveFile(doc.outerHtml(), htmlInputFile.getFileName(), outputPath,
                               settings.getFileEncode());
             }
