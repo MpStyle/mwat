@@ -4,6 +4,7 @@ import mp.mwat.controller.MWAT;
 import mp.mwat.model.input.Input;
 import mp.mwat.model.input.InputValidationBook;
 import mp.mwat.model.settings.Settings;
+import mp.mwat.model.string.StringBook;
 import org.apache.log4j.Logger;
 
 import java.io.BufferedReader;
@@ -58,19 +59,19 @@ public class Main {
       Input input = parseInput(arg);
 
       switch (input) {
-      case HTML_INPUT_FOLDER:
+      case i:
         m.setHtmlInputPath(args[i + 1]);
         break;
-      case HTML_OUTPUT_FOLDER:
+      case o:
         m.setHtmlOutputPath(args[i + 1]);
         break;
-      case JSON_LANGUAGE_INPUT_FOLDER:
+      case l:
         m.setJsonLanguagesInput(args[i + 1]);
         break;
-      case CLEAR_OUTPUT_FOLDER:
+      case c:
         m.setClearOutputFolder(true);
         break;
-      case FILE_ENCODE:
+      case e:
         m.setFileEncode(args[i + 1]);
         break;
       }
@@ -144,11 +145,12 @@ public class Main {
 
   private static Input parseInput(String arg) {
     try {
-      return Input.valueOf(arg);
+      return Input.valueOf(StringBook.removeString(arg, "-"));
     } catch (Exception ex) {
+      LOGGER.error(ex);
     }
 
-    return null;
+    return Input.none;
   }
 
   private Main setHtmlInputPath(String htmlInputPath) {
@@ -183,13 +185,13 @@ public class Main {
 
     String firstArgument = args[0];
 
-    return Main.parseInput(firstArgument) == Input.HELP;
+    return Main.parseInput(firstArgument) == Input.h;
   }
 
   private void printHelp() {
     BufferedReader br = null;
     ClassLoader classLoader = getClass().getClassLoader();
-    File file = new File(classLoader.getResource("/help.txt").getFile());
+    File file = new File(classLoader.getResource("help.txt").getFile());
     String helpContent = "";
 
     try {
@@ -199,7 +201,7 @@ public class Main {
       br = new BufferedReader(new FileReader(file));
 
       while ((sCurrentLine = br.readLine()) != null) {
-        helpContent += sCurrentLine;
+        helpContent += sCurrentLine + "\n";
       }
 
     } catch (IOException e) {

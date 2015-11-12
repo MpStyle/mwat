@@ -22,12 +22,13 @@ package mp.mwat.model.input;
  * comando.
  */
 public enum Input {
-  HTML_INPUT_FOLDER("-i"),
-  HTML_OUTPUT_FOLDER("-o"),
-  JSON_LANGUAGE_INPUT_FOLDER("-l"),
-  FILE_ENCODE("-e"),
-  HELP("-h"),
-  CLEAR_OUTPUT_FOLDER("-c");
+  i("i"),
+  o("o"),
+  l("l"),
+  e("e"),
+  h("h"),
+  c("c"),
+  none("none");
 
   private final String text;
 
