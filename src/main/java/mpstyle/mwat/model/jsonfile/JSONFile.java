@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with mwat.  If not, see <http://www.gnu.org/licenses/>.
  */
-package mp.mwat.model.jsonfile;
+package mpstyle.mwat.model.jsonfile;
 
 /**
  * Incampsula le proprietà dei file JSON che contengono le traduzioni delle

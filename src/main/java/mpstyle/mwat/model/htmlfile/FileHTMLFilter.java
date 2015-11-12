@@ -14,27 +14,19 @@
  * You should have received a copy of the GNU General Public License
  * along with mwat.  If not, see <http://www.gnu.org/licenses/>.
  */
-package mp.mwat.model.input;
+package mpstyle.mwat.model.htmlfile;
 
-import mp.mwat.model.string.StringBook;
-import org.apache.log4j.Logger;
+import mpstyle.mwat.model.filesystem.file.FileExtensionFilter;
 
-public class InputBook
+/**
+ * Specializzazione della classe FileExtensionFilter per filtrare i file con
+ * estensione {@link HTMLFileBook#HTML_FILE_EXTENSION .html}
+ */
+public class FileHTMLFilter extends FileExtensionFilter
 {
 
-    private static final Logger LOGGER = Logger.getLogger(InputBook.class);
-
-    public static Input parseInput(String arg)
+    public FileHTMLFilter()
     {
-        try
-        {
-            return Input.valueOf(StringBook.removeString(arg, "-"));
-        }
-        catch (Exception ex)
-        {
-            LOGGER.error(ex);
-        }
-
-        return Input.none;
+        super(HTMLFileBook.HTML_FILE_EXTENSION);
     }
 }

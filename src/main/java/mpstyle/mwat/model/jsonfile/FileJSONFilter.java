@@ -14,19 +14,19 @@
  * You should have received a copy of the GNU General Public License
  * along with mwat.  If not, see <http://www.gnu.org/licenses/>.
  */
-package mp.mwat.model.htmlfile;
+package mpstyle.mwat.model.jsonfile;
 
-import mp.mwat.model.filesystem.file.FileExtensionFilter;
+import mpstyle.mwat.model.filesystem.file.FileExtensionFilter;
 
 /**
  * Specializzazione della classe FileExtensionFilter per filtrare i file con
- * estensione {@link HTMLFileBook#HTML_FILE_EXTENSION .html}
+ * estensione {@link JSONFileBook#JSON_FILE_EXTENSION .json}
  */
-public class FileHTMLFilter extends FileExtensionFilter
+public class FileJSONFilter extends FileExtensionFilter
 {
 
-    public FileHTMLFilter()
+    public FileJSONFilter()
     {
-        super(HTMLFileBook.HTML_FILE_EXTENSION);
+        super(JSONFileBook.JSON_FILE_EXTENSION);
     }
 }

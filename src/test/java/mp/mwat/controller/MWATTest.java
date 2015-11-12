@@ -1,6 +1,7 @@
 package mp.mwat.controller;
 
-import mp.mwat.model.settings.Settings;
+import mpstyle.mwat.controller.MWAT;
+import mpstyle.mwat.model.settings.Settings;
 
 import java.net.URL;
 

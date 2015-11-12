@@ -14,13 +14,13 @@
  * You should have received a copy of the GNU General Public License
  * along with mwat.  If not, see <http://www.gnu.org/licenses/>.
  */
-package mp.mwat.model.filesystem.file;
+package mpstyle.mwat.model.filesystem.file;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import mp.mwat.model.filesystem.folder.FolderBook;
+import mpstyle.mwat.model.filesystem.folder.FolderBook;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 

@@ -14,19 +14,38 @@
  * You should have received a copy of the GNU General Public License
  * along with mwat.  If not, see <http://www.gnu.org/licenses/>.
  */
-package mp.mwat.model.jsonfile;
-
-import mp.mwat.model.filesystem.file.FileExtensionFilter;
+package mpstyle.mwat.model.input;
 
 /**
- * Specializzazione della classe FileExtensionFilter per filtrare i file con
- * estensione {@link JSONFileBook#JSON_FILE_EXTENSION .json}
+ * Enum che raccoglie i possibili input che il programa può ricevere da linea di
+ * comando.
  */
-public class FileJSONFilter extends FileExtensionFilter
+public enum Input
 {
+    i("i"),
+    o("o"),
+    l("l"),
+    e("e"),
+    h("h"),
+    c("c"),
+    none("none");
 
-    public FileJSONFilter()
+    private final String text;
+
+    /**
+     * @param text
+     */
+    Input(final String text)
     {
-        super(JSONFileBook.JSON_FILE_EXTENSION);
+        this.text = text;
+    }
+
+    /* (non-Javadoc)
+   * @see java.lang.Enum#toString()
+     */
+    @Override
+    public String toString()
+    {
+        return text;
     }
 }

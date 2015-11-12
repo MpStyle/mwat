@@ -14,14 +14,14 @@
  * You should have received a copy of the GNU General Public License
  * along with mwat.  If not, see <http://www.gnu.org/licenses/>.
  */
-package mp.mwat;
+package mpstyle.mwat;
 
-import mp.mwat.controller.MWAT;
-import mp.mwat.model.input.Input;
-import mp.mwat.model.input.InputBook;
-import mp.mwat.model.input.InputValidationBook;
-import mp.mwat.model.man.ManBook;
-import mp.mwat.model.settings.Settings;
+import mpstyle.mwat.controller.MWAT;
+import mpstyle.mwat.model.input.Input;
+import mpstyle.mwat.model.input.InputBook;
+import mpstyle.mwat.model.input.InputValidationBook;
+import mpstyle.mwat.model.man.ManBook;
+import mpstyle.mwat.model.settings.Settings;
 import org.apache.log4j.Logger;
 
 public class Main

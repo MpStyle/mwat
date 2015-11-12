@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with mwat.  If not, see <http://www.gnu.org/licenses/>.
  */
-package mp.mwat.model.filesystem.file;
+package mpstyle.mwat.model.filesystem.file;
 
 import java.io.File;
 import java.io.FilenameFilter;

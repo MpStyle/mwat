@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with mwat.  If not, see <http://www.gnu.org/licenses/>.
  */
-package mp.mwat.model.htmlfile;
+package mpstyle.mwat.model.htmlfile;
 
 import java.io.File;
 

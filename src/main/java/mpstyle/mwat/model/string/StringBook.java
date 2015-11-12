@@ -14,38 +14,36 @@
  * You should have received a copy of the GNU General Public License
  * along with mwat.  If not, see <http://www.gnu.org/licenses/>.
  */
-package mp.mwat.model.input;
+package mpstyle.mwat.model.string;
 
 /**
- * Enum che raccoglie i possibili input che il programa può ricevere da linea di
- * comando.
+ * Classe di utility che raccoglie operazioni atomiche sulle stringhe.
  */
-public enum Input
+public final class StringBook
 {
-    i("i"),
-    o("o"),
-    l("l"),
-    e("e"),
-    h("h"),
-    c("c"),
-    none("none");
-
-    private final String text;
 
     /**
-     * @param text
+     * Rimuove da <i>string</i> la stringa <i>toRemove</i>.<br>
+     * Esempio:
+     * <code>
+     *   String dirty = "Hello kjbsWorld";
+     *   String clean = StringBook.removeString(dirty, "kjbs");
+     *   System.out.println(clean);
+     * </code>
+     * L'output sarà <i>Hello World!</i>.
+     *
+     * @param string
+     * @param toRemove
+     *
+     * @return
      */
-    Input(final String text)
+    public static final String removeString(String string, String toRemove)
     {
-        this.text = text;
-    }
+        if (string == null)
+        {
+            return string;
+        }
 
-    /* (non-Javadoc)
-   * @see java.lang.Enum#toString()
-     */
-    @Override
-    public String toString()
-    {
-        return text;
+        return string.replace(toRemove, "");
     }
 }

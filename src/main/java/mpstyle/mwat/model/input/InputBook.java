@@ -14,36 +14,27 @@
  * You should have received a copy of the GNU General Public License
  * along with mwat.  If not, see <http://www.gnu.org/licenses/>.
  */
-package mp.mwat.model.string;
+package mpstyle.mwat.model.input;
 
-/**
- * Classe di utility che raccoglie operazioni atomiche sulle stringhe.
- */
-public final class StringBook
+import mpstyle.mwat.model.string.StringBook;
+import org.apache.log4j.Logger;
+
+public class InputBook
 {
 
-    /**
-     * Rimuove da <i>string</i> la stringa <i>toRemove</i>.<br>
-     * Esempio:
-     * <code>
-     *   String dirty = "Hello kjbsWorld";
-     *   String clean = StringBook.removeString(dirty, "kjbs");
-     *   System.out.println(clean);
-     * </code>
-     * L'output sarà <i>Hello World!</i>.
-     *
-     * @param string
-     * @param toRemove
-     *
-     * @return
-     */
-    public static final String removeString(String string, String toRemove)
+    private static final Logger LOGGER = Logger.getLogger(InputBook.class);
+
+    public static Input parseInput(String arg)
     {
-        if (string == null)
+        try
         {
-            return string;
+            return Input.valueOf(StringBook.removeString(arg, "-"));
+        }
+        catch (Exception ex)
+        {
+            LOGGER.error(ex);
         }
 
-        return string.replace(toRemove, "");
+        return Input.none;
     }
 }

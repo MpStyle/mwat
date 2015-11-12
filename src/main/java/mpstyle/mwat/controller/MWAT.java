@@ -14,14 +14,14 @@
  * You should have received a copy of the GNU General Public License
  * along with mwat.  If not, see <http://www.gnu.org/licenses/>.
  */
-package mp.mwat.controller;
+package mpstyle.mwat.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import mp.mwat.model.htmlfile.HTMLFile;
-import mp.mwat.model.htmlfile.HTMLFileBook;
-import mp.mwat.model.jsonfile.JSONFile;
-import mp.mwat.model.jsonfile.JSONFileBook;
-import mp.mwat.model.settings.Settings;
+import mpstyle.mwat.model.htmlfile.HTMLFile;
+import mpstyle.mwat.model.htmlfile.HTMLFileBook;
+import mpstyle.mwat.model.jsonfile.JSONFile;
+import mpstyle.mwat.model.jsonfile.JSONFileBook;
+import mpstyle.mwat.model.settings.Settings;
 import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -30,8 +30,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
-import mp.mwat.model.filesystem.file.FileBook;
-import mp.mwat.model.filesystem.folder.FolderBook;
+import mpstyle.mwat.model.filesystem.file.FileBook;
+import mpstyle.mwat.model.filesystem.folder.FolderBook;
 
 /**
  * Questa classe implementa le operazioni da eseguire per tradurre le diverse

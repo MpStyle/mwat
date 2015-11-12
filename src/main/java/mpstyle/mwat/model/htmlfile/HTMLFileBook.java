@@ -14,10 +14,10 @@
  * You should have received a copy of the GNU General Public License
  * along with mwat.  If not, see <http://www.gnu.org/licenses/>.
  */
-package mp.mwat.model.htmlfile;
+package mpstyle.mwat.model.htmlfile;
 
-import mp.mwat.model.jsonfile.JSONFileBook;
-import mp.mwat.model.string.StringBook;
+import mpstyle.mwat.model.jsonfile.JSONFileBook;
+import mpstyle.mwat.model.string.StringBook;
 import org.apache.log4j.Logger;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;

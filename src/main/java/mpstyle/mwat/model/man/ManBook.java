@@ -14,13 +14,12 @@
  * You should have received a copy of the GNU General Public License
  * along with mwat.  If not, see <http://www.gnu.org/licenses/>.
  */
-package mp.mwat.model.man;
+package mpstyle.mwat.model.man;
 
-import mp.mwat.model.input.Input;
-import mp.mwat.model.input.InputBook;
-import mp.mwat.model.settings.Settings;
-
-import mp.mwat.model.filesystem.file.FileBook;
+import mpstyle.mwat.model.input.Input;
+import mpstyle.mwat.model.input.InputBook;
+import mpstyle.mwat.model.settings.Settings;
+import mpstyle.mwat.model.filesystem.file.FileBook;
 import org.apache.log4j.Logger;
 
 public class ManBook
