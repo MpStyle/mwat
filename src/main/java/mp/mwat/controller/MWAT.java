@@ -32,118 +32,142 @@ import java.util.List;
  * You should have received a copy of the GNU General Public License
  * along with mwat.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 /**
- * Questa classe implementa le operazioni da eseguire per tradurre le diverse view.<br />
- * Per eseguire la traduzione avviare il metodo {@link #start() start}.<br />
+ * Questa classe implementa le operazioni da eseguire per tradurre le diverse
+ * view.<br>
+ * Per eseguire la traduzione avviare il metodo {@link #start() start}.<br>
  * Scorre tutti i file JSON delle traduzioni e tutti i file delle viste (HTML),
- * creando delle view (HTML) tradutti.<br />
+ * creando delle view (HTML) tradutti.<br>
  * Per ulteriori dettagli: {@link #run() run}
  */
-public class MWAT {
-  private final static Logger LOGGER = Logger.getLogger(MWAT.class);
-  private final ObjectMapper JSON_MAPPER = new ObjectMapper();
+public class MWAT
+{
 
-  private Settings settings;
-  private List<JSONFile> jsList;
-  private List<HTMLFile> htmlinputFileList;
+    private final static Logger LOGGER = Logger.getLogger(MWAT.class);
+    private final ObjectMapper JSON_MAPPER = new ObjectMapper();
 
-  public MWAT(Settings settings) {
-    this.settings = settings;
-  }
+    private final Settings settings;
+    private List<JSONFile> jsList;
+    private List<HTMLFile> htmlinputFileList;
 
-  /**
-   * Il metodo <i>start</i> ha il solo compito di incapsulare la chiamata al metodo {@link #run() run},
-   * stampando le eventuali eccezioni provocate dalla sua esecuzione.
-   */
-  public void start() {
-    try {
-      run();
-    } catch (Exception ex) {
-      LOGGER.error(ex);
-    }
-  }
-
-  /**
-   * Il metodo run scorre tutti i file <i>.json</i> presenti nella cartella <i>jsonLanguagesInput</i>,
-   * scorre tutti i file <i>.html</i> presenti nella cartella <i>htmlInputPath</i> e se in questi trova
-   * dei tag con proprietà <i>tr</i> prepend la traduzione.<br />
-   * Al termine salve un file <i>.html</i> di output.
-   */
-  protected void run() throws Exception {
-    jsList = JSONFileBook.getJSONFile(settings.getJsonLanguagesInput());
-    htmlinputFileList = HTMLFileBook
-        .getHTMLFileList(settings.getHtmlInputPath(),
-            settings.getHtmlInputPath());
-
-    if (jsList.size() <= 0) {
-      LOGGER.info("Files of translations not found.");
-      return;
+    public MWAT(Settings settings)
+    {
+        this.settings = settings;
     }
 
-    if (htmlinputFileList.size() <= 0) {
-      LOGGER.info("HTML input files not found.");
-      return;
+    /**
+     * Il metodo <i>start</i> ha il solo compito di incapsulare la chiamata al
+     * metodo {@link #run() run}, stampando le eventuali eccezioni provocate
+     * dalla sua esecuzione.
+     */
+    public void start()
+    {
+        try
+        {
+            run();
+        }
+        catch (Exception ex)
+        {
+            LOGGER.error(ex);
+        }
     }
 
-    File output = new File(settings.getHtmlOutputPath());
-    if (settings.isEmptyOutputFolder()) {
-      LOGGER.info("Empty output folder...");
-      FileSystemBook.deleteFolder(output);
-      LOGGER.info("Empty output folder completed.");
-    }
-    FileSystemBook.createFolder(output);
+    /**
+     * Il metodo run scorre tutti i file <i>.json</i> presenti nella cartella
+     * <i>jsonLanguagesInput</i>, scorre tutti i file <i>.html</i> presenti
+     * nella cartella <i>htmlInputPath</i> e se in questi trova dei tag con
+     * proprietà <i>tr</i> prepend la traduzione.<br>
+     * Al termine salve un file <i>.html</i> di output.
+     *
+     * @throws java.lang.Exception
+     */
+    protected void run() throws Exception
+    {
+        jsList = JSONFileBook.getJSONFile(settings.getJsonLanguagesInput());
+        htmlinputFileList = HTMLFileBook
+            .getHTMLFileList(settings.getHtmlInputPath(),
+                             settings.getHtmlInputPath());
 
-    parseTranslations();
-  }
-
-  /**
-   * Scorre tutti i file .json delle traduzioni e per ogni file chiama il metodo
-   * {@link #parseViews(HashMap, String) parseViews}.
-   *
-   * @throws IOException
-   */
-  private void parseTranslations() throws IOException {
-    for (JSONFile js : jsList) {
-
-      HashMap<String, String> entries = JSON_MAPPER
-          .readValue(new File(js.getPath()), HashMap.class);
-
-      parseViews(entries, js.getName());
-    }
-  }
-
-  /**
-   * Scorre tutte le view HTML che devono essere tradotte. Cercando la proprietà
-   * <i>segnaposto</i> che indicano quale traduzione utilizzare e prepend del testo
-   * localizzato.
-   *
-   * @param entries Mappa chiave-valore delle traduzioni.
-   * @param jsName  Identificativo della traduzione.
-   */
-  private void parseViews(HashMap<String, String> entries, String jsName) {
-    try {
-      for (HTMLFile htmlInputFile : htmlinputFileList) {
-        File input = new File(htmlInputFile.getAbsoluteFilePath());
-        Document doc = Jsoup.parse(input, settings.getFileEncode());
-
-        doc = HTMLFileBook
-            .translateHtml(doc, entries, settings.getTranslationProperty(),
-                jsName);
-        if (doc == null) {
-          throw new Exception("Unknow error in the translation");
+        if (jsList.size() <= 0)
+        {
+            LOGGER.info("Files of translations not found.");
+            return;
         }
 
-        String outputPath =
-            settings.getHtmlOutputPath() + File.separator + jsName
-                + File.separator + htmlInputFile.getRelativeFolderPath();
+        if (htmlinputFileList.size() <= 0)
+        {
+            LOGGER.info("HTML input files not found.");
+            return;
+        }
 
-        FileSystemBook
-            .saveFile(doc.outerHtml(), htmlInputFile.getFileName(), outputPath,
-                settings.getFileEncode());
-      }
-    } catch (Exception ex) {
-      LOGGER.error(ex);
+        File output = new File(settings.getHtmlOutputPath());
+        if (settings.isEmptyOutputFolder())
+        {
+            LOGGER.info("Empty output folder...");
+            FileSystemBook.deleteFolder(output);
+            LOGGER.info("Empty output folder completed.");
+        }
+        FileSystemBook.createFolder(output);
+
+        parseTranslations();
     }
-  }
+
+    /**
+     * Scorre tutti i file .json delle traduzioni e per ogni file chiama il
+     * metodo {@link #parseViews(HashMap, String) parseViews}.
+     *
+     * @throws IOException
+     */
+    private void parseTranslations() throws IOException
+    {
+        for (JSONFile js : jsList)
+        {
+
+            HashMap<String, String> entries = JSON_MAPPER
+                .readValue(new File(js.getPath()), HashMap.class);
+
+            parseViews(entries, js.getName());
+        }
+    }
+
+    /**
+     * Scorre tutte le view HTML che devono essere tradotte. Cercando la
+     * proprietà
+     * <i>segnaposto</i> che indicano quale traduzione utilizzare e prepend del
+     * testo localizzato.
+     *
+     * @param entries Mappa chiave-valore delle traduzioni.
+     * @param jsName  Identificativo della traduzione.
+     */
+    private void parseViews(HashMap<String, String> entries, String jsName)
+    {
+        try
+        {
+            for (HTMLFile htmlInputFile : htmlinputFileList)
+            {
+                File input = new File(htmlInputFile.getAbsoluteFilePath());
+                Document doc = Jsoup.parse(input, settings.getFileEncode());
+
+                doc = HTMLFileBook
+                    .translateHtml(doc, entries, settings.getTranslationProperty(),
+                                   jsName);
+                if (doc == null)
+                {
+                    throw new Exception("Unknow error in the translation");
+                }
+
+                String outputPath
+                       = settings.getHtmlOutputPath() + File.separator + jsName
+                    + File.separator + htmlInputFile.getRelativeFolderPath();
+
+                FileSystemBook
+                    .saveFile(doc.outerHtml(), htmlInputFile.getFileName(), outputPath,
+                              settings.getFileEncode());
+            }
+        }
+        catch (Exception ex)
+        {
+            LOGGER.error(ex);
+        }
+    }
 }

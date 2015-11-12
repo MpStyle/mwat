@@ -16,34 +16,36 @@ package mp.mwat.model.input;
  * You should have received a copy of the GNU General Public License
  * along with mwat.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 /**
  * Enum che raccoglie i possibili input che il programa può ricevere da linea di
  * comando.
  */
-public enum Input {
-  i("i"),
-  o("o"),
-  l("l"),
-  e("e"),
-  h("h"),
-  c("c"),
-  none("none");
+public enum Input
+{
+    i("i"),
+    o("o"),
+    l("l"),
+    e("e"),
+    h("h"),
+    c("c"),
+    none("none");
 
-  private final String text;
+    private final String text;
 
-  /**
-   * @param text
-   */
-  Input(final String text) {
-    this.text = text;
-  }
+    /**
+     * @param text
+     */
+    Input(final String text)
+    {
+        this.text = text;
+    }
 
-  /* (non-Javadoc)
+    /* (non-Javadoc)
    * @see java.lang.Enum#toString()
-   */
-  @Override
-  public String toString() {
-    return text;
-  }
+     */
+    @Override
+    public String toString()
+    {
+        return text;
+    }
 }

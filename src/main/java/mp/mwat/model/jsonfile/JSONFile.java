@@ -16,52 +16,59 @@ package mp.mwat.model.jsonfile;
  * You should have received a copy of the GNU General Public License
  * along with mwat.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 /**
- * Incampsula le proprietà dei file JSON che contengono le traduzioni delle stringhe.<br />
+ * Incampsula le proprietà dei file JSON che contengono le traduzioni delle
+ * stringhe.<br>
  * Le proprietà sono:
  * <ul>
- *   <li>Il nome della traduzione, per esempio: it, fr, etc...</li>
- *   <li>Il path del file.</li>
+ * <li>Il nome della traduzione, per esempio: it, fr, etc...</li>
+ * <li>Il path del file.</li>
  * </ul>
  */
-public class JSONFile {
-  private String name;
-  private String path;
+public class JSONFile
+{
 
-  /**
-   * Restituisce il nome, senza estensione del file JSON.
-   * @return
-   */
-  public String getName() {
-    return name;
-  }
+    private String name;
+    private String path;
 
-  /**
-   * Setta il nome, dovrà essere senza estensione, del file JSON.
-   *
-   * @param name
-   */
-  public void setName(String name) {
-    this.name = name;
-  }
+    /**
+     * Restituisce il nome, senza estensione del file JSON.
+     *
+     * @return
+     */
+    public String getName()
+    {
+        return name;
+    }
 
-  /**
-   * Restituisce la path del file JSON delle traduzioni.
-   *
-   * @return
-   */
-  public String getPath() {
-    return path;
-  }
+    /**
+     * Setta il nome, dovrà essere senza estensione, del file JSON.
+     *
+     * @param name
+     */
+    public void setName(String name)
+    {
+        this.name = name;
+    }
 
-  /**
-   * Setta la path del file JSON delle traduzioni.
-   *
-   * @param path
-   */
-  public void setPath(String path) {
-    this.path = path;
-  }
+    /**
+     * Restituisce la path del file JSON delle traduzioni.
+     *
+     * @return
+     */
+    public String getPath()
+    {
+        return path;
+    }
+
+    /**
+     * Setta la path del file JSON delle traduzioni.
+     *
+     * @param path
+     */
+    public void setPath(String path)
+    {
+        this.path = path;
+    }
 
 }

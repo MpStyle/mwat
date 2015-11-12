@@ -16,30 +16,34 @@ package mp.mwat.model.string;
  * You should have received a copy of the GNU General Public License
  * along with mwat.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 /**
  * Classe di utility che raccoglie operazioni atomiche sulle stringhe.
  */
-public final class StringBook {
-  /**
-   * Rimuove da <i>string</i> la stringa <i>toRemove</i>.<br />
-   * Esempio:
-   * <code>
-   *   String dirty = "Hello kjbsWorld";
-   *   String clean = StringBook.removeString(dirty, "kjbs");
-   *   System.out.println(clean);
-   * </code>
-   * L'output sarà <i>Hello World!</i>.
-   *
-   * @param string
-   * @param toRemove
-   * @return
-   */
-  public static final String removeString(String string, String toRemove) {
-    if (string == null) {
-      return string;
-    }
+public final class StringBook
+{
 
-    return string.replace(toRemove, "");
-  }
+    /**
+     * Rimuove da <i>string</i> la stringa <i>toRemove</i>.<br>
+     * Esempio:
+     * <code>
+     *   String dirty = "Hello kjbsWorld";
+     *   String clean = StringBook.removeString(dirty, "kjbs");
+     *   System.out.println(clean);
+     * </code>
+     * L'output sarà <i>Hello World!</i>.
+     *
+     * @param string
+     * @param toRemove
+     *
+     * @return
+     */
+    public static final String removeString(String string, String toRemove)
+    {
+        if (string == null)
+        {
+            return string;
+        }
+
+        return string.replace(toRemove, "");
+    }
 }

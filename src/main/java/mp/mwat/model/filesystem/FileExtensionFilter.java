@@ -24,7 +24,7 @@ import java.io.FilenameFilter;
  * Classe che estende FilenameFilter, specializzata nella ricerca di file data l'estensione.
  */
 public class FileExtensionFilter implements FilenameFilter {
-  private String extension;
+  private final String extension;
 
   /**
    * Il costruttore riceverà il nome dell'estensione e si preoccuperà di aggiungere

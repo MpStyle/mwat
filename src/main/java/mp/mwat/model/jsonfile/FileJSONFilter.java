@@ -18,13 +18,15 @@ import mp.mwat.model.filesystem.FileExtensionFilter;
  * You should have received a copy of the GNU General Public License
  * along with mwat.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 /**
  * Specializzazione della classe FileExtensionFilter per filtrare i file con
  * estensione {@link JSONFileBook#JSON_FILE_EXTENSION .json}
  */
-public class FileJSONFilter extends FileExtensionFilter {
-  public FileJSONFilter() {
-    super(JSONFileBook.JSON_FILE_EXTENSION);
-  }
+public class FileJSONFilter extends FileExtensionFilter
+{
+
+    public FileJSONFilter()
+    {
+        super(JSONFileBook.JSON_FILE_EXTENSION);
+    }
 }

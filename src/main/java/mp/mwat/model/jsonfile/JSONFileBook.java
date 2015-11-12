@@ -22,33 +22,38 @@ import java.util.List;
  * You should have received a copy of the GNU General Public License
  * along with mwat.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 /**
  * Classe di utility che raccoglie operazioni sui file JSON.
  */
-public final class JSONFileBook {
-  public static final String JSON_FILE_EXTENSION = ".json";
+public final class JSONFileBook
+{
 
-  /**
-   * Restituisce un elenco di File che sono contenuti della cartella <i>htmlInputFolder</i>.
-   *
-   * @param jsonFolder
-   * @return
-   */
-  public static List<JSONFile> getJSONFile(String jsonFolder) {
-    ArrayList<JSONFile> fileList = new ArrayList<JSONFile>();
-    File folder = new File(jsonFolder);
-    File[] fileEntries = folder.listFiles(new FileJSONFilter());
+    public static final String JSON_FILE_EXTENSION = ".json";
 
-    for (final File fileEntry : fileEntries) {
-      JSONFile jf = new JSONFile();
-      jf.setName(
-          StringBook.removeString(fileEntry.getName(), JSON_FILE_EXTENSION));
-      jf.setPath(fileEntry.getAbsolutePath());
+    /**
+     * Restituisce un elenco di File che sono contenuti della cartella
+     * <i>htmlInputFolder</i>.
+     *
+     * @param jsonFolder
+     *
+     * @return
+     */
+    public static List<JSONFile> getJSONFile(String jsonFolder)
+    {
+        ArrayList<JSONFile> fileList = new ArrayList<JSONFile>();
+        File folder = new File(jsonFolder);
+        File[] fileEntries = folder.listFiles(new FileJSONFilter());
 
-      fileList.add(jf);
+        for (final File fileEntry : fileEntries)
+        {
+            JSONFile jf = new JSONFile();
+            jf.setName(
+                StringBook.removeString(fileEntry.getName(), JSON_FILE_EXTENSION));
+            jf.setPath(fileEntry.getAbsolutePath());
+
+            fileList.add(jf);
+        }
+
+        return fileList;
     }
-
-    return fileList;
-  }
 }

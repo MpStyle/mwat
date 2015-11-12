@@ -28,83 +28,95 @@ import java.util.List;
  * You should have received a copy of the GNU General Public License
  * along with mwat.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 /**
- * Classe di utility che raccoglie le operazioni atomiche che si possono effettuare
+ * Classe di utility che raccoglie le operazioni atomiche che si possono
+ * effettuare
  * sui file .html.
  */
-public final class HTMLFileBook {
-  private static final Logger LOGGER = Logger.getLogger(HTMLFileBook.class);
-  public static final String HTML_FILE_EXTENSION = ".html";
+public final class HTMLFileBook
+{
 
-  /**
-   * Restituisce un elenco di stringhe che rappresentano i path dei file
-   * contenuti nella cartella <i>htmlInputFolder</i>.
-   *
-   * @param htmlFolder Cartella di input dei file HTML da tradurre.
-   * @param rootFolder Cartella di input dei file HTML da tradurre.
-   * @return
-   */
-  public static List<HTMLFile> getHTMLFileList(String htmlFolder,
-      String rootFolder) {
-    ArrayList<HTMLFile> fileList = new ArrayList<HTMLFile>();
-    File folder = new File(htmlFolder);
+    private static final Logger LOGGER = Logger.getLogger(HTMLFileBook.class);
+    public static final String HTML_FILE_EXTENSION = ".html";
 
-    for (final File fileEntry : folder.listFiles()) {
-      if (fileEntry.isDirectory()) {
-        fileList.addAll(HTMLFileBook
-            .getHTMLFileList(fileEntry.getAbsolutePath(), rootFolder));
-        continue;
-      }
+    /**
+     * Restituisce un elenco di stringhe che rappresentano i path dei file
+     * contenuti nella cartella <i>htmlInputFolder</i>.
+     *
+     * @param htmlFolder Cartella di input dei file HTML da tradurre.
+     * @param rootFolder Cartella di input dei file HTML da tradurre.
+     *
+     * @return
+     */
+    public static List<HTMLFile> getHTMLFileList(String htmlFolder,
+                                                 String rootFolder)
+    {
+        ArrayList<HTMLFile> fileList = new ArrayList<HTMLFile>();
+        File folder = new File(htmlFolder);
 
-      if (!fileEntry.isFile() || !fileEntry.getName()
-          .endsWith(HTML_FILE_EXTENSION)) {
-        continue;
-      }
+        for (final File fileEntry : folder.listFiles())
+        {
+            if (fileEntry.isDirectory())
+            {
+                fileList.addAll(HTMLFileBook
+                    .getHTMLFileList(fileEntry.getAbsolutePath(), rootFolder));
+                continue;
+            }
 
-      HTMLFile file = new HTMLFile();
-      file.setFileName(fileEntry.getName());
-      file.setAbsoluteFolderPath(StringBook
-          .removeString(fileEntry.getAbsolutePath(), fileEntry.getName()));
-      file.setRelativeFolderPath(
-          StringBook.removeString(file.getAbsoluteFolderPath(), rootFolder));
+            if (!fileEntry.isFile() || !fileEntry.getName()
+                .endsWith(HTML_FILE_EXTENSION))
+            {
+                continue;
+            }
 
-      fileList.add(file);
+            HTMLFile file = new HTMLFile();
+            file.setFileName(fileEntry.getName());
+            file.setAbsoluteFolderPath(StringBook
+                .removeString(fileEntry.getAbsolutePath(), fileEntry.getName()));
+            file.setRelativeFolderPath(
+                StringBook.removeString(file.getAbsoluteFolderPath(), rootFolder));
+
+            fileList.add(file);
+        }
+
+        return fileList;
     }
 
-    return fileList;
-  }
+    /**
+     * Inserisce le traduzioni nel Document <i>doc</i> per gli Elements con
+     * <i>translationProperty</i> valorizzata.
+     *
+     * @param doc                 Document da tradurre.
+     * @param entries             Mappa chiave-valore delle traduzioni.
+     * @param translationProperty Proprietà dei tag che indica dove inserire la
+     *                            traduzione.
+     * @param jsName              Nome della traduzione.
+     *
+     * @return
+     */
+    public static Document translateHtml(Document doc,
+                                         HashMap<String, String> entries, String translationProperty,
+                                         String jsName)
+    {
 
-  /**
-   * Inserisce le traduzioni nel Document <i>doc</i> per gli Elements con
-   * <i>translationProperty</i> valorizzata.
-   *
-   * @param doc                 Document da tradurre.
-   * @param entries             Mappa chiave-valore delle traduzioni.
-   * @param translationProperty Proprietà dei tag che indica dove inserire la traduzione.
-   * @param jsName              Nome della traduzione.
-   * @return
-   */
-  public static Document translateHtml(Document doc,
-      HashMap<String, String> entries, String translationProperty,
-      String jsName) {
+        Elements toTranslateList = doc.select("[" + translationProperty + "]");
 
-    Elements toTranslateList = doc.select("[" + translationProperty + "]");
+        for (Element toTranslate : toTranslateList)
+        {
+            String key = toTranslate.attr(translationProperty);
 
-    for (Element toTranslate : toTranslateList) {
-      String key = toTranslate.attr(translationProperty);
+            if (!entries.containsKey(key))
+            {
+                LOGGER.warn(String
+                    .format("No translation for key %s in %s%s file.", key, jsName,
+                            JSONFileBook.JSON_FILE_EXTENSION));
+                continue;
+            }
 
-      if (!entries.containsKey(key)) {
-        LOGGER.warn(String
-            .format("No translation for key %s in %s%s file.", key, jsName,
-                JSONFileBook.JSON_FILE_EXTENSION));
-        continue;
-      }
+            String translation = entries.get(key);
+            toTranslate.prependText(translation);
+        }
 
-      String translation = entries.get(key);
-      toTranslate.prependText(translation);
+        return doc;
     }
-
-    return doc;
-  }
 }

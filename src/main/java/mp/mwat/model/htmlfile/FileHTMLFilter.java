@@ -18,13 +18,15 @@ import mp.mwat.model.filesystem.FileExtensionFilter;
  * You should have received a copy of the GNU General Public License
  * along with mwat.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 /**
  * Specializzazione della classe FileExtensionFilter per filtrare i file con
  * estensione {@link HTMLFileBook#HTML_FILE_EXTENSION .html}
  */
-public class FileHTMLFilter extends FileExtensionFilter {
-  public FileHTMLFilter() {
-    super(HTMLFileBook.HTML_FILE_EXTENSION);
-  }
+public class FileHTMLFilter extends FileExtensionFilter
+{
+
+    public FileHTMLFilter()
+    {
+        super(HTMLFileBook.HTML_FILE_EXTENSION);
+    }
 }
