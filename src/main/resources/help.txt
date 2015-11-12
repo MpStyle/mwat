@@ -1,0 +1,15 @@
+mwat - mobile web app translator
+version %s
+
+Usage:
+  java mwat -i /project/input_folder -o /project/output_folder -j /project/languages [-c] [-e]
+
+The parameters are:
+  -i    Set the input folder of the .html file to translate. Mandatory.
+  -o    Set the output folder where the the translated .html file will be stored. Mandatory.
+  -l    Set the folder containing the .json file of the translation. Mandatory.
+  -e    Set the encode (UTF-8 is the default) to read the .html file to translate and to save the translated .html file.
+  -h    Print this screen.
+  -c    Use this parameter if you want to remove all the files in the output folder, before write the translated files. The default value doesn't remove anything.
+
+For more details, visit the page https://github.com/MpStyle/mwat
