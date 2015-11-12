@@ -27,13 +27,8 @@ import org.apache.log4j.Logger;
 public class Main
 {
 
+    private final Settings settings = new Settings();
     private final static Logger LOGGER = Logger.getLogger(Main.class);
-
-    private String htmlInputPath = null;
-    private String jsonLanguagesInput = null;
-    private String htmlOutputPath = null;
-    private String fileEncode = Settings.DEFAULT_FILE_ENCODE;
-    private boolean clearOutputFolder = false;
 
     /**
      * args può gestire i seguenti parametri:
@@ -47,8 +42,12 @@ public class Main
      */
     public static void main(String[] args)
     {
-        Main m = new Main();
+        Main m = new Main(args);
+        m.start();
+    }
 
+    private Main(String[] args)
+    {
         int i = 0;
 
         if (ManBook.isHelpRequest(args))
@@ -64,26 +63,24 @@ public class Main
             switch (input)
             {
                 case i:
-                    m.setHtmlInputPath(args[i + 1]);
+                    settings.setHtmlInputPath(args[i + 1]);
                     break;
                 case o:
-                    m.setHtmlOutputPath(args[i + 1]);
+                    settings.setHtmlOutputPath(args[i + 1]);
                     break;
                 case l:
-                    m.setJsonLanguagesInput(args[i + 1]);
+                    settings.setJsonLanguagesInput(args[i + 1]);
                     break;
                 case c:
-                    m.setClearOutputFolder(true);
+                    settings.setEmptyOutputFolder(true);
                     break;
                 case e:
-                    m.setFileEncode(args[i + 1]);
+                    settings.setFileEncode(args[i + 1]);
                     break;
             }
 
             i++;
         }
-
-        m.start();
     }
 
     private void start()
@@ -105,17 +102,13 @@ public class Main
             return;
         }
 
-        Settings settings = Settings.getSettings().setHtmlInputPath(htmlInputPath)
-            .setJsonLanguagesInput(jsonLanguagesInput)
-            .setHtmlOutputPath(htmlOutputPath)
-            .setEmptyOutputFolder(clearOutputFolder).setFileEncode(fileEncode);
         MWAT m = new MWAT(settings);
         m.start();
     }
 
     private boolean validateInput()
     {
-        switch (InputValidationBook.validateHTMLInputFolder(htmlInputPath))
+        switch (InputValidationBook.validateHTMLInputFolder(settings.getHtmlInputPath()))
         {
             case ERROR_HTML_INPUT_FOLDER_IS_INVALID_PATH:
                 LOGGER.error("\"-i\" HTML input folder must be a valid path.");
@@ -128,7 +121,7 @@ public class Main
                 return false;
         }
 
-        switch (InputValidationBook.validateHTMLOutputFolder(htmlOutputPath))
+        switch (InputValidationBook.validateHTMLOutputFolder(settings.getHtmlOutputPath()))
         {
             case ERROR_HTML_OUTPUT_FOLDER_IS_INVALID_PATH:
                 LOGGER.error("\"-h\" HTML output folder must be a valid path.");
@@ -141,7 +134,7 @@ public class Main
                 return false;
         }
         switch (InputValidationBook
-            .validateJSONLanguageFolder(jsonLanguagesInput))
+            .validateJSONLanguageFolder(settings.getJsonLanguagesInput()))
         {
             case ERROR_JSON_LANGUAGE_INPUT_FOLDER_IS_INVALID_PATH:
                 LOGGER.error("\"-l\" JSON language folder must be a valid path.");
@@ -155,35 +148,5 @@ public class Main
         }
 
         return true;
-    }
-
-    private Main setHtmlInputPath(String htmlInputPath)
-    {
-        this.htmlInputPath = htmlInputPath;
-        return this;
-    }
-
-    private Main setJsonLanguagesInput(String jsonLanguagesInput)
-    {
-        this.jsonLanguagesInput = jsonLanguagesInput;
-        return this;
-    }
-
-    private Main setHtmlOutputPath(String htmlOutputPath)
-    {
-        this.htmlOutputPath = htmlOutputPath;
-        return this;
-    }
-
-    private Main setFileEncode(String fileEncode)
-    {
-        this.fileEncode = fileEncode;
-        return this;
-    }
-
-    private Main setClearOutputFolder(boolean clearOutputFolder)
-    {
-        this.clearOutputFolder = clearOutputFolder;
-        return this;
     }
 }
