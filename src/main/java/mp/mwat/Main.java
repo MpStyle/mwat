@@ -2,15 +2,11 @@ package mp.mwat;
 
 import mp.mwat.controller.MWAT;
 import mp.mwat.model.input.Input;
+import mp.mwat.model.input.InputBook;
 import mp.mwat.model.input.InputValidationBook;
+import mp.mwat.model.man.ManBook;
 import mp.mwat.model.settings.Settings;
-import mp.mwat.model.string.StringBook;
 import org.apache.log4j.Logger;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 
 /*
  * This file is part of mwat.
@@ -43,20 +39,20 @@ public class Main {
    * <li>-o   HTMLs output folder containers</li>
    * </ul>
    *
-   * @param args
+   * @param args I parametri passati da riga di comando
    */
   public static void main(String[] args) {
     Main m = new Main();
 
     int i = 0;
 
-    if (isHelpRequest(args)) {
-      m.printHelp();
+    if (ManBook.isHelpRequest(args)) {
+      ManBook.printHelp(Main.class);
       return;
     }
 
     for (String arg : args) {
-      Input input = parseInput(arg);
+      Input input = InputBook.parseInput(arg);
 
       switch (input) {
       case i:
@@ -143,16 +139,6 @@ public class Main {
     return true;
   }
 
-  private static Input parseInput(String arg) {
-    try {
-      return Input.valueOf(StringBook.removeString(arg, "-"));
-    } catch (Exception ex) {
-      LOGGER.error(ex);
-    }
-
-    return Input.none;
-  }
-
   private Main setHtmlInputPath(String htmlInputPath) {
     this.htmlInputPath = htmlInputPath;
     return this;
@@ -176,45 +162,5 @@ public class Main {
   private Main setClearOutputFolder(boolean clearOutputFolder) {
     this.clearOutputFolder = clearOutputFolder;
     return this;
-  }
-
-  private static boolean isHelpRequest(String[] args) {
-    if (args.length <= 0) {
-      return false;
-    }
-
-    String firstArgument = args[0];
-
-    return Main.parseInput(firstArgument) == Input.h;
-  }
-
-  private void printHelp() {
-    BufferedReader br = null;
-    ClassLoader classLoader = getClass().getClassLoader();
-    File file = new File(classLoader.getResource("help.txt").getFile());
-    String helpContent = "";
-
-    try {
-
-      String sCurrentLine;
-
-      br = new BufferedReader(new FileReader(file));
-
-      while ((sCurrentLine = br.readLine()) != null) {
-        helpContent += sCurrentLine + "\n";
-      }
-
-    } catch (IOException e) {
-      e.printStackTrace();
-    } finally {
-      try {
-        if (br != null)
-          br.close();
-      } catch (IOException ex) {
-        ex.printStackTrace();
-      }
-    }
-
-    System.out.println(String.format(helpContent, Settings.CURRENT_VERSION));
   }
 }
