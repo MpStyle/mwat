@@ -21,10 +21,11 @@ import mpstyle.mwat.model.input.Input;
 import mpstyle.mwat.model.input.InputBook;
 import mpstyle.mwat.model.input.InputValidationBook;
 import mpstyle.mwat.model.man.ManBook;
+import mpstyle.mwat.model.operation.AbstractOperation;
 import mpstyle.mwat.model.settings.Settings;
 import org.apache.log4j.Logger;
 
-public class Main
+public class Main extends AbstractOperation
 {
 
     private final Settings settings = new Settings();
@@ -83,19 +84,7 @@ public class Main
         }
     }
 
-    private void start()
-    {
-        try
-        {
-            run();
-        }
-        catch (Exception ex)
-        {
-            LOGGER.error(ex);
-        }
-    }
-
-    private void run()
+    protected void run()
     {
         if (!validateInput())
         {

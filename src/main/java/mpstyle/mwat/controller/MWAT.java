@@ -30,8 +30,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
 import mpstyle.mwat.model.filesystem.file.FileBook;
 import mpstyle.mwat.model.filesystem.folder.FolderBook;
+import mpstyle.mwat.model.operation.AbstractOperation;
 
 /**
  * Questa classe implementa le operazioni da eseguire per tradurre le diverse
@@ -41,7 +43,7 @@ import mpstyle.mwat.model.filesystem.folder.FolderBook;
  * creando delle view (HTML) tradutti.<br>
  * Per ulteriori dettagli: {@link #run() run}
  */
-public class MWAT
+public class MWAT extends AbstractOperation
 {
 
     private final static Logger LOGGER = Logger.getLogger(MWAT.class);
@@ -57,60 +59,48 @@ public class MWAT
     }
 
     /**
-     * Il metodo <i>start</i> ha il solo compito di incapsulare la chiamata al
-     * metodo {@link #run() run}, stampando le eventuali eccezioni provocate
-     * dalla sua esecuzione.
-     */
-    public void start()
-    {
-        try
-        {
-            run();
-        }
-        catch (Exception ex)
-        {
-            LOGGER.error(ex);
-        }
-    }
-
-    /**
      * Il metodo run scorre tutti i file <i>.json</i> presenti nella cartella
      * <i>jsonLanguagesInput</i>, scorre tutti i file <i>.html</i> presenti
      * nella cartella <i>htmlInputPath</i> e se in questi trova dei tag con
      * proprietà <i>tr</i> prepend la traduzione.<br>
      * Al termine salve un file <i>.html</i> di output.
-     *
-     * @throws java.lang.Exception
      */
-    protected void run() throws Exception
+    protected void run()
     {
-        jsList = JSONFileBook.getJSONFile(settings.getJsonLanguagesInput());
-        htmlinputFileList = HTMLFileBook
-            .getHTMLFileList(settings.getHtmlInputPath(),
-                             settings.getHtmlInputPath());
-
-        if (jsList.size() <= 0)
+        try
         {
-            LOGGER.info("Files of translations not found.");
-            return;
-        }
+            jsList = JSONFileBook.getJSONFile(settings.getJsonLanguagesInput());
+            htmlinputFileList = HTMLFileBook
+                .getHTMLFileList(settings.getHtmlInputPath(),
+                                 settings.getHtmlInputPath());
 
-        if (htmlinputFileList.size() <= 0)
+            if (jsList.size() <= 0)
+            {
+                LOGGER.info("Files of translations not found.");
+                return;
+            }
+
+            if (htmlinputFileList.size() <= 0)
+            {
+                LOGGER.info("HTML input files not found.");
+                return;
+            }
+
+            File output = new File(settings.getHtmlOutputPath());
+            if (settings.isEmptyOutputFolder())
+            {
+                LOGGER.info("Empty output folder...");
+                FolderBook.deleteFolder(output);
+                LOGGER.info("Empty output folder completed.");
+            }
+            FolderBook.createFolder(output);
+
+            parseTranslations();
+        }
+        catch (Exception ex)
         {
-            LOGGER.info("HTML input files not found.");
-            return;
+            LOGGER.error(ex);
         }
-
-        File output = new File(settings.getHtmlOutputPath());
-        if (settings.isEmptyOutputFolder())
-        {
-            LOGGER.info("Empty output folder...");
-            FolderBook.deleteFolder(output);
-            LOGGER.info("Empty output folder completed.");
-        }
-        FolderBook.createFolder(output);
-
-        parseTranslations();
     }
 
     /**
