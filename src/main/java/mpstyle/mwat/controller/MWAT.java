@@ -99,7 +99,7 @@ public class MWAT extends AbstractOperation
         }
         catch (Exception ex)
         {
-            LOGGER.error(ex);
+            LOGGER.debug(ex);
         }
     }
 
@@ -151,14 +151,18 @@ public class MWAT extends AbstractOperation
                        = settings.getHtmlOutputPath() + File.separator + jsName
                     + File.separator + htmlInputFile.getRelativeFolderPath();
 
-                FileBook
+                boolean result = FileBook
                     .saveFile(doc.outerHtml(), htmlInputFile.getFileName(), outputPath,
                               settings.getFileEncode());
+
+                if(!result){
+                    LOGGER.error(String.format("The translated view %s\\%s isn't savad correctly.", outputPath, htmlInputFile.getFileName()));
+                }
             }
         }
         catch (Exception ex)
         {
-            LOGGER.error(ex);
+            LOGGER.debug(ex);
         }
     }
 }
