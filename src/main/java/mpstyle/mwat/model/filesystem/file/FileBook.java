@@ -24,30 +24,50 @@ import mpstyle.mwat.model.filesystem.folder.FolderBook;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 
+/**
+ * This class is a collector for the methods related with the file of the filesystem.
+ */
 public class FileBook
 {
 
     private static final Logger LOGGER = Logger.getLogger(FileBook.class);
 
     /**
-     * Se necessario crea la cartella di destinazione <i>folderPath</i> e salva
-     * il file <i>fileName</i>
-     * con contenuto <i>content</i> all'interno di essa.
+     * The method saves the <i>content</i> in a file with name <i>fileName</i>,
+     * in the folder path <i>folderPath</i> using the encode <i>fileEncode</i>.<br>
+     * If it is necessary, it creates the path.<br>
+     * It returns <i>true</i> if the task is completed without errors, otherwise
+     * <i>false</i>.
      *
-     * @param content
-     * @param fileName
-     * @param folderPath
-     * @param fileEncode
+     * @param content The content of the file.
+     * @param fileName The name of the file to save.
+     * @param folderPath The folder of the path where to save the file.
+     * @param fileEncode The encode to use to save the file.
+     * @return The result of the operation.
      *
      * @throws Exception
      */
-    public static void saveFile(String content, String fileName, String folderPath, String fileEncode) throws Exception
+    public static boolean saveFile(String content, String fileName, String folderPath, String fileEncode)
     {
-        FolderBook.createFolder(new File(folderPath));
-        final File f = new File(folderPath + File.separator + fileName);
-        FileUtils.writeStringToFile(f, content, fileEncode);
+        try {
+            FolderBook.createFolder(new File(folderPath));
+            final File f = new File(folderPath + File.separator + fileName);
+            FileUtils.writeStringToFile(f, content, fileEncode);
+
+            return true;
+        } catch (Exception e) {
+            LOGGER.debug(e);
+        }
+
+        return false;
     }
 
+    /**
+     * It returns the content of the file <i>path</i>.
+     *
+     * @param path The file to read.
+     * @return The content of the file.
+     */
     public static String getFileContent(String path)
     {
         BufferedReader br = null;
