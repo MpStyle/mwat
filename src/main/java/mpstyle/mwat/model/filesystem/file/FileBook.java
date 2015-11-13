@@ -84,7 +84,7 @@ public class FileBook
         }
         catch (IOException e)
         {
-            LOGGER.error(e);
+            LOGGER.debug(e);
         }
         finally
         {
@@ -97,7 +97,7 @@ public class FileBook
             }
             catch (IOException ex)
             {
-                LOGGER.error(ex);
+                LOGGER.debug(ex);
             }
         }
         return content;
