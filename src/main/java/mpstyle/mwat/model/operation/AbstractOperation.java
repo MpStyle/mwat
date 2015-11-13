@@ -18,14 +18,19 @@ package mpstyle.mwat.model.operation;
 
 import org.apache.log4j.Logger;
 
+/**
+ * This class rappresents a task/operation to run, it provides a backbone for
+ * the specialization classes.<br>
+ * The only method to override is {@link #run() run}.<br>
+ * To lunch an operation call the method {@link #start() start}.<br>
+ */
 public abstract class AbstractOperation
 {
     private final Logger LOGGER=Logger.getLogger(AbstractOperation.class);
     
     /**
-     * Il metodo <i>start</i> ha il solo compito di incapsulare la chiamata al
-     * metodo {@link #run() run}, stampando le eventuali eccezioni provocate
-     * dalla sua esecuzione.
+     * (Right now) The only task of this method is to encapsulate the call to the method
+     * {@link #run() run} and print the throwed exceptions using log4j.
      */
     public final void start()
     {
