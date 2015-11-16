@@ -22,13 +22,22 @@ import mpstyle.mwat.model.settings.Settings;
 import mpstyle.mwat.model.filesystem.file.FileBook;
 import org.apache.log4j.Logger;
 
+/**
+ * This is an utility class, it collects all the methods used to manage the help.
+ */
 public class ManBook
 {
     
     private static final Logger LOGGER = Logger.getLogger(ManBook.class);
     
     private static final String HELP_FILE_PATH = "help.txt";
-    
+
+    /**
+     * Returns true if in the arguments contain a requesto to print the help.
+     *
+     * @param args
+     * @return
+     */
     public static boolean isHelpRequest(String[] args)
     {
         if (args.length <= 0)
@@ -42,8 +51,7 @@ public class ManBook
     }
 
     /**
-     * Stampa il file help.txt, sostituendo il segnaposto con il numero della
-     * versione.
+     * Print the help.txt file, it replace the placeholder with the number of the version.
      */
     public static void printHelp()
     {
