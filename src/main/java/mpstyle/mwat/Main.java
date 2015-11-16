@@ -28,7 +28,7 @@ import org.apache.log4j.Logger;
 public class Main extends AbstractOperation
 {
 
-    private final Settings settings = new Settings();
+    private final Settings settings = Settings.getSettings();
     private final static Logger LOGGER = Logger.getLogger(Main.class);
 
     /**
