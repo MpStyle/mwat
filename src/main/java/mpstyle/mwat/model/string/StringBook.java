@@ -17,20 +17,20 @@
 package mpstyle.mwat.model.string;
 
 /**
- * Classe di utility che raccoglie operazioni atomiche sulle stringhe.
+ * This is an utilty class. It collects the methods for operations with the string.
  */
 public final class StringBook
 {
 
     /**
-     * Rimuove da <i>string</i> la stringa <i>toRemove</i>.<br>
-     * Esempio:
+     * Remove from <i>string</i> the <i>toRemove</i> string.<br>
+     * Example:
      * <code>
      *   String dirty = "Hello kjbsWorld";
      *   String clean = StringBook.removeString(dirty, "kjbs");
      *   System.out.println(clean);
      * </code>
-     * L'output sarà <i>Hello World!</i>.
+     * The output will be <i>Hello World!</i>.
      *
      * @param string
      * @param toRemove
