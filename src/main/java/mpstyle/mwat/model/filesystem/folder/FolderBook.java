@@ -19,7 +19,7 @@ package mpstyle.mwat.model.filesystem.folder;
 import java.io.File;
 import org.apache.log4j.Logger;
 
-public class FolderBook
+public final class FolderBook
 {
 
     private static final Logger LOGGER = Logger.getLogger(FolderBook.class);

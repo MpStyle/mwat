@@ -22,7 +22,7 @@ import org.apache.log4j.Logger;
 /**
  * This is an utilty class. It collects the methods for operations with the input.
  */
-public class InputBook
+public final class InputBook
 {
 
     private static final Logger LOGGER = Logger.getLogger(InputBook.class);

@@ -25,7 +25,7 @@ import org.apache.log4j.Logger;
 /**
  * This is an utility class, it collects all the methods used to manage the help.
  */
-public class ManBook
+public final class ManBook
 {
     
     private static final Logger LOGGER = Logger.getLogger(ManBook.class);

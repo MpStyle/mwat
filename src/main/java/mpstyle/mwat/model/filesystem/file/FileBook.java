@@ -27,7 +27,7 @@ import org.apache.log4j.Logger;
 /**
  * This class is a collector for the methods related with the file of the filesystem.
  */
-public class FileBook
+public final class FileBook
 {
 
     private static final Logger LOGGER = Logger.getLogger(FileBook.class);
