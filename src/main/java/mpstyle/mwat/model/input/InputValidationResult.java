@@ -16,46 +16,49 @@
  */
 package mpstyle.mwat.model.input;
 
+/**
+ * The enum collects the values related to the validation of the input coming from the command line.
+ */
 public enum InputValidationResult
 {
     /**
-     * Il valore è corretto.
+     * The values is correct.
      */
     OK,
     /**
-     * La cartella contenente gli HTML da parsare non è stata definita.
+     * The folder of the HTML file to parse isn't in the arguments.
      */
     ERROR_HTML_INPUT_FOLDER_IS_MANDATORY,
     /**
-     * Il path non è una cartella.
+     * The folder of the HTML file to parse isn't a folder.
      */
     ERROR_HTML_INPUT_FOLDER_MUST_BE_A_FOLDER,
     /**
-     * La cartella di output degli HTML tradotti non è stata definita.
+     * The folder of the translated HTML file is't in the arguments.
      */
     ERROR_HTML_OUTPUT_FOLDER_IS_MANDATORY,
     /**
-     * Il path non è una cartella.
+     * The folder of the translated HTML file is't a folder.
      */
     ERROR_HTML_OUTPUT_FOLDER_MUST_BE_A_FOLDER,
     /**
-     * La cartella contenente le traduzioni JSON non è stata definita.
+     * The folder of the JSON file of translation is't in the arguments.
      */
     ERROR_JSON_LANGUAGE_INPUT_FOLDER_IS_MANDATORY,
     /**
-     * Il path non è una cartella.
+     * The folder of the JSON file of translation is't a folder.
      */
     ERROR_JSON_LANGUAGE_INPUT_FOLDER_MUST_BE_A_FOLDER,
     /**
-     * La cartella contenente gli HTML da parsare non è un path valido.
+     * The folder of the HTML file to parse isn't valid.
      */
     ERROR_HTML_INPUT_FOLDER_IS_INVALID_PATH,
     /**
-     * La cartella di output degli HTML tradotti non è un path valido.
+     * The folder of the translated HTML file is't valid.
      */
     ERROR_HTML_OUTPUT_FOLDER_IS_INVALID_PATH,
     /**
-     * La cartella contenente le traduzioni JSON non è un path valido.
+     * The folder of the JSON file of translation is't valid.
      */
     ERROR_JSON_LANGUAGE_INPUT_FOLDER_IS_INVALID_PATH
 }
