@@ -19,11 +19,19 @@ package mpstyle.mwat.model.input;
 import mpstyle.mwat.model.string.StringBook;
 import org.apache.log4j.Logger;
 
+/**
+ * This is an utilty class. It collects the methods for operations with the input.
+ */
 public class InputBook
 {
 
     private static final Logger LOGGER = Logger.getLogger(InputBook.class);
 
+    /**
+     * Parse the string (argument of the mail method) to a Input value.
+     * @param arg
+     * @return
+     */
     public static Input parseInput(String arg)
     {
         try
