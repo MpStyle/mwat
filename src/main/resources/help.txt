@@ -11,5 +11,6 @@ The parameters are:
   -e    Set the encode (UTF-8 is the default) to read the .html file to translate and to save the translated .html file.
   -h    Print this screen.
   -c    Use this parameter if you want to remove all the files in the output folder, before write the translated files. The default value doesn't remove anything.
+  -t    The tag property used to translate the string.
 
 For more details, visit the page https://github.com/MpStyle/mwat

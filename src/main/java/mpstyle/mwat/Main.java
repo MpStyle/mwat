@@ -78,6 +78,9 @@ public class Main extends AbstractOperation
                 case e:
                     settings.setFileEncode(args[i + 1]);
                     break;
+                case t:
+                    settings.setTranslationProperty(args[i+1]);
+                    break;
             }
 
             i++;

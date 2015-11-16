@@ -27,6 +27,7 @@ public enum Input
     e("e"),
     h("h"),
     c("c"),
+    t("t"),
     none("none");
 
     private final String text;
