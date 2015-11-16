@@ -17,8 +17,7 @@
 package mpstyle.mwat.model.input;
 
 /**
- * Enum che raccoglie i possibili input che il programa può ricevere da linea di
- * comando.
+ * It collects all the possible input coming from the command line.
  */
 public enum Input
 {
@@ -41,7 +40,7 @@ public enum Input
     }
 
     /* (non-Javadoc)
-   * @see java.lang.Enum#toString()
+     * @see java.lang.Enum#toString()
      */
     @Override
     public String toString()
