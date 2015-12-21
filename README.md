@@ -6,12 +6,12 @@ mwat (mobile web app translator) is a command line tool to perform an easy way t
 I know, it isn't clear, let me try to explain with an example.
 
 ## Preamble
-I like to develop web apps. The web technologies are very attractive, easy to understand and use.
-I have found a boring point about these technologies: the translation.
-There are a lot of js libraries to permit the translations, but i don't like them: they aren't intuitive (easy to use) and the result user experience isn't good (loading...).
+I like developing web apps. The web technologies are very attractive, easy to understand and to use.
+A boring point about these technologies is the translation.
+There are a lot of Javascript libraries to permit the translations, but I don't like them: they aren't intuitive (easy to use) and the user experience isn't good (loading...).
 
 ## The example
-My web project has this struccture:
+My web project has this structure:
 - app
   - languages
     - it.json
@@ -20,7 +20,7 @@ My web project has this struccture:
     - index.html
 - mwat.jar
 
-In the laguanges folder there is the *json* file containing the traslations:
+In the laguanges folder there is the *json* file containing the translations:
 ```
 {
   "app_name": "mwat",
@@ -44,9 +44,9 @@ In the views folder there is the *view* to translate:
 </html>
 ```
 
-In the output folder, after the execution of the program, there will a sub-folder "*it*" containing the *index.html* translated.
+In the output folder, after executing the program, there will be a sub-folder "*it*" containing the translated *index.html*.
 
-As you can see, in the views/index.html file there are particular property in some tag: "*tr*". These are our bookmark. 
+As you can see, in the views/index.html file there are particular properties in some tags: "*tr*". These are our bookmarks. 
 The program will parse all the files in the *views* folder (not recursively yet), it will search for the *tr* properties and it will prepend in the tag the translation. After that, it will save the translated files in a *it* sub-folder of the *output* folder.
 
 So, if we run the program in this way:
@@ -81,7 +81,7 @@ The content of the app/output/it/index.html will be:
 </html>
 ```
 
-And that's all folk.
+And that's all folks.
 
 ## Next improvements
 - Translate JavaDoc in English.
