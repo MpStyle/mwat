@@ -19,6 +19,7 @@ package mpstyle.mwat.model.htmlfile;
 import mpstyle.mwat.model.jsonfile.JSONFileBook;
 import mpstyle.mwat.model.string.StringBook;
 import org.apache.log4j.Logger;
+import org.jsoup.nodes.Attribute;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -98,7 +99,45 @@ public final class HTMLFileBook
                                          HashMap<String, String> entries, String translationProperty,
                                          String jsName)
     {
+        doc=translateContent(doc, entries, translationProperty, jsName);
+        doc=translateAttribute(doc, entries, translationProperty, jsName);
+        return doc;
+    }
 
+    private static Document translateAttribute(Document doc,
+                                               HashMap<String, String> entries, String translationProperty,
+                                               String jsName){
+        Elements toTranslateList = doc.select("*");
+
+        for (Element toTranslate : toTranslateList)
+        {
+            for (Attribute attribute:toTranslate.attributes()) {
+                if( attribute.getKey().startsWith(translationProperty+"-") ){
+                    String key = attribute.getValue();
+
+                    if (!entries.containsKey(key))
+                    {
+                        LOGGER.warn(String
+                                .format("No translation for key %s in %s%s file.", key, jsName,
+                                        JSONFileBook.JSON_FILE_EXTENSION));
+                        continue;
+                    }
+
+                    String translation = entries.get(key);
+
+                    toTranslate.attr(attribute.getKey().replaceAll(translationProperty+"-", ""),translation);
+
+                    toTranslate.attributes().remove(attribute.getKey());
+                }
+            }
+        }
+
+        return doc;
+    }
+
+    private static Document translateContent(Document doc,
+                                               HashMap<String, String> entries, String translationProperty,
+                                               String jsName){
         Elements toTranslateList = doc.select("[" + translationProperty + "]");
 
         for (Element toTranslate : toTranslateList)
@@ -108,13 +147,15 @@ public final class HTMLFileBook
             if (!entries.containsKey(key))
             {
                 LOGGER.warn(String
-                    .format("No translation for key %s in %s%s file.", key, jsName,
-                            JSONFileBook.JSON_FILE_EXTENSION));
+                        .format("No translation for key %s in %s%s file.", key, jsName,
+                                JSONFileBook.JSON_FILE_EXTENSION));
                 continue;
             }
 
             String translation = entries.get(key);
             toTranslate.prependText(translation);
+
+            toTranslate.attributes().remove(translationProperty);
         }
 
         return doc;

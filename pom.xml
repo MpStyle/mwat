@@ -43,7 +43,7 @@
                         <index>true</index>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>mp.mwat.Main</mainClass>
+                            <mainClass>mpstyle.mwat.Main</mainClass>
                             <classpathPrefix>dependency-jars/</classpathPrefix>
                         </manifest>
                     </archive>
