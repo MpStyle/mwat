@@ -28,7 +28,7 @@ public final class InputBook
     private static final Logger LOGGER = Logger.getLogger(InputBook.class);
 
     /**
-     * Parse the string (argument of the mail method) to a Input value.
+     * Parse the string (argument of the main method) to a Input value.
      * @param arg
      * @return
      */
@@ -40,7 +40,7 @@ public final class InputBook
         }
         catch (Exception ex)
         {
-            LOGGER.error(ex);
+            LOGGER.debug(ex);
         }
 
         return Input.none;

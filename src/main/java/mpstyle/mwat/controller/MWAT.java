@@ -109,13 +109,19 @@ public class MWAT extends AbstractOperation
      *
      * @throws IOException
      */
-    private void parseTranslations() throws IOException
-    {
+    private void parseTranslations() throws IOException {
         for (JSONFile js : jsList)
         {
+            HashMap<String, String> entries;
 
-            HashMap<String, String> entries = JSON_MAPPER
-                .readValue(new File(js.getPath()), HashMap.class);
+            try {
+                entries = JSON_MAPPER
+                        .readValue(new File(js.getPath()), HashMap.class);
+            }
+            catch(Exception ex){
+                LOGGER.info("Invalid json: " + js.getPath());
+                throw ex;
+            }
 
             parseViews(entries, js.getName());
         }

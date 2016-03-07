@@ -21,13 +21,13 @@ package mpstyle.mwat.model.input;
  */
 public enum Input
 {
-    i("i"),
-    o("o"),
-    l("l"),
-    e("e"),
-    h("h"),
-    c("c"),
-    t("t"),
+    i("i"), // VIEWS_INPUT_FOLDER
+    o("o"), // OUTPUT_FOLDER
+    l("l"), // LANGUAGES_INPUT_FOLDER
+    e("e"), // INPUT_FILES_ENCODING
+    h("h"), // HELP
+    c("c"), // CLEAR_OUTPUT_FOLDER
+    t("t"), // TRANSLATION_HTML_PROPERTY
     none("none");
 
     private final String text;

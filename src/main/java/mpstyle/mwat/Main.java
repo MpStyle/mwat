@@ -116,13 +116,13 @@ public class Main extends AbstractOperation
         switch (InputValidationBook.validateHTMLOutputFolder(settings.getHtmlOutputPath()))
         {
             case ERROR_HTML_OUTPUT_FOLDER_IS_INVALID_PATH:
-                LOGGER.error("\"-h\" HTML output folder must be a valid path.");
+                LOGGER.error("\"-o\" HTML output folder must be a valid path.");
                 return false;
             case ERROR_HTML_OUTPUT_FOLDER_IS_MANDATORY:
-                LOGGER.error("-h is a mandatory parameter.");
+                LOGGER.error("-o is a mandatory parameter.");
                 return false;
             case ERROR_HTML_OUTPUT_FOLDER_MUST_BE_A_FOLDER:
-                LOGGER.error("\"-h\" HTML output folder must be a folder.");
+                LOGGER.error("\"-o\" HTML output folder must be a folder.");
                 return false;
         }
         switch (InputValidationBook
